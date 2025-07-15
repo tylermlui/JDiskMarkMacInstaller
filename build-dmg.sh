@@ -1,8 +1,12 @@
 #!/bin/bash
+
+chmod +x JDiskMark.app/Contents/MacOS/run
+
+#getting VERSION variable
 source ./version-utils.sh
 
 #update Info.plist
-./update-info-version.sh
+bash update-info-version.sh
 
 echo "Starting JDiskMark macOS DMG build..."
 
