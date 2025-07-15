@@ -1,11 +1,12 @@
 #!/bin/bash
+source ./version-utils.sh
 
-BUILD_PROPS="JDiskMark.app/Contents/Resources/build.properties"
+#update Info.plist
+./update-info-version.sh
 
-#Gets version from build props and must change version number to start with a 1 as jpackage does not allow for 0 as the major version
-RAW_VERSION=$(grep '^version=' "$BUILD_PROPS" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-VERSION=$(echo "$RAW_VERSION" | sed -E 's/^0\./1./')
-echo "THE VERSION is: '$VERSION'"
+echo "Starting JDiskMark macOS DMG build..."
+
+echo "Building DMG for version: $VERSION"
 
 jpackage --input JDiskMark.app/Contents/MacOS \
          --name JDiskMark \
@@ -14,3 +15,9 @@ jpackage --input JDiskMark.app/Contents/MacOS \
          --type dmg \
          --app-version "$VERSION" \
          --icon JDiskMark.app/Contents/Resources/JDM.icns
+
+if [ $? -eq 0 ]; then
+  echo "DMG build completed successfully."
+else
+  echo "DMG build failed."
+fi

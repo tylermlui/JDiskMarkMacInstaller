@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.5.1//EN" "http://www.apple.com/DTDs/PropertyList-1.5.1.dtd">
-<plist version="1.5.1">
+   <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key>
     <string>run</string> 
@@ -12,7 +12,7 @@
     <string>jDiskMark</string> 
 
     <key>CFBundleVersion</key>
-    <string>1.5.1</string> 
+    <string>0.0.0</string>
 
     <key>CFBundlePackageType</key>
     <string>APPL</string>
