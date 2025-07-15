@@ -7,6 +7,12 @@ DATE=`date +%Y-%m-%d`
 TIME=`date +%H:%M:%S`
 LOG_PREFIX="[$DATE $TIME]"
 
+#Version 
+#Gets version from build props and must change version number to start with a 1 as jpackage does not allow for 0 as the major version
+RAW_VERSION=$(grep '^version=' "$BUILD_PROPS" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+VERSION=$(echo "$RAW_VERSION" | sed -E 's/^0\./1./')
+PRODUCT=JDiskMark
+
 #Functions
 log_info() {
     echo "${LOG_PREFIX}[INFO]" $1
@@ -28,7 +34,8 @@ fi
 
 echo "Welcome to Application Uninstaller"
 echo "The following packages will be REMOVED:"
-echo "JDiskMark-0.5.3"
+echo "JDiskMark-$VERSION"
+
 while true; do
     read -p "Do you wish to continue [Y/n]?" answer
     [[ $answer == "y" || $answer == "Y" || $answer == "" ]] && break
@@ -36,10 +43,6 @@ while true; do
     echo "Please answer with 'y' or 'n'"
 done
 
-
-#Need to replace these with install preparation script
-VERSION=0.5.3
-PRODUCT=JDiskMark
 
 echo "Application uninstalling process started"
 # remove link to shorcut file
