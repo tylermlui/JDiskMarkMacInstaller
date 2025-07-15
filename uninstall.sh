@@ -7,6 +7,10 @@ DATE=`date +%Y-%m-%d`
 TIME=`date +%H:%M:%S`
 LOG_PREFIX="[$DATE $TIME]"
 
+#Version 
+source ./version-utils.sh
+PRODUCT=JDiskMark
+
 #Functions
 log_info() {
     echo "${LOG_PREFIX}[INFO]" $1
@@ -28,7 +32,8 @@ fi
 
 echo "Welcome to Application Uninstaller"
 echo "The following packages will be REMOVED:"
-echo "  JDiskMark-0.5.3"
+echo "JDiskMark-$VERSION"
+
 while true; do
     read -p "Do you wish to continue [Y/n]?" answer
     [[ $answer == "y" || $answer == "Y" || $answer == "" ]] && break
@@ -37,13 +42,9 @@ while true; do
 done
 
 
-#Need to replace these with install preparation script
-VERSION=0.5.3
-PRODUCT=JDiskMark
-
 echo "Application uninstalling process started"
 # remove link to shorcut file
-find "/usr/local/bin/" -name "JDiskMark-0.5.3" | xargs rm
+find "/usr/local/bin/" -name "$PRODUCT-$VERSION" | xargs rm
 if [ $? -eq 0 ]
 then
   echo "[1/3] [DONE] Successfully deleted shortcut links"
